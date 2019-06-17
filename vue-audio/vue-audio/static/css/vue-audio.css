@@ -1,0 +1,110 @@
+.vue-audio {
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+}
+.left-btn{
+    width: 20%; 
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.left-btn>img {
+    width:  40px;
+    height: 40px;
+    cursor: pointer;
+}
+.center-content {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.progress-bar {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.line-container {
+    width: 100%;
+    height: 5px;
+    background: white;
+    position: relative;
+    cursor: pointer;
+}
+.time-point {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    left: 0px;
+    z-index: 5;
+    cursor: pointer;
+    background: lightblue;
+}
+.current-time-bar {
+    width: 0px;
+    height: 100%;
+    background: skyblue;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.preload-bar {
+    width: 0px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.song-info {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.singer-head {
+    width: 50px;
+    height: 50px;
+    background: white;
+}
+.singer-head>img {
+    width: 100%;
+    height: 100%;
+}
+.song {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+}
+.time-info {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+}
+.right-btn {
+    width: 20%;
+    height: 100%;
+    /* background: white; */
+}
