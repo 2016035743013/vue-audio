@@ -4,18 +4,21 @@
 
 ## Build Setup
 
+这是在vue的脚手架上开发的音频播放插件，使用jQuery和vue这两种框架 
 ``` bash
-# install dependencies
+# install dependencies  首先是安装需要的依赖， 
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8080   运行项目
 npm run dev
 
-# build for production with minification
-npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+# 这是音频播放器
+<VueAudio :audio='audio' :src='audioSrc' @songEnded = 'songEnd' :audioCss = 'audioCss'/>
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+
+
+
+

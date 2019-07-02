@@ -27,14 +27,14 @@
     background: white;
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 .point {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     position: absolute;
-    top: -5px;
-    left: 0px;
     z-index: 5;
     cursor: pointer;
     background: lightblue;
@@ -46,11 +46,15 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    z-index: 2;
 }
 .preloadBar {
     width: 0px;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 .song-info {
     width: 100%;

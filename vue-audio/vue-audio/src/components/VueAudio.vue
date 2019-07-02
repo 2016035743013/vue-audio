@@ -36,7 +36,7 @@
 			}
 		},
 		props: [
-			'opt',//audio对象
+			'audio',//audio对象
 			'src',//音频链接
 			'audioCss',//播放器样式
 		],
@@ -61,7 +61,7 @@
 					)
 				}
 
-				that.audioDom = that.opt;
+				that.audioDom = that.audio;
 				// that.audioDom.src = that.audioSrc[0];
 				// 播放结束播放下一首歌
 				that.audioDom.addEventListener('ended', function() {

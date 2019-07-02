@@ -13,7 +13,7 @@
 
       <!-- 音频播放组件开始 -->
       <div class="audio-container">
-        <VueAudio :opt='audio' :src='audioSrc' @songEnded = 'songEnd' :audioCss = 'audioCss'/>
+        <VueAudio :audio='audio' :src='audioSrc' @songEnded='songEnd' :audioCss = 'audioCss'/>
       </div>
       <!-- 音频播放组件结束 -->
 
@@ -34,9 +34,8 @@ export default {
       audioSrc: '',//音频链接
       audioLinks: [require('./assets/audio/audio.mp3'),require('./assets/audio/audio2.mp3'),require('./assets/audio/audio3.mp3')],//音频链接
       audioCss: {
-        test: {},
         lineContainer: {
-          height: 5,
+          height: '4px',
           backgroundColor: 'rgba(255,255,255,0.2)'
         },//进度容器的高度和颜色
         time: {
@@ -44,8 +43,8 @@ export default {
           color: 'white'
         },//字体的大小和颜色
         point: {
-          width: '15px',
-          height: '15px',
+          width: '12px',
+          height: '12px',
           backgroundColor: 'white'
         },//进度条点的大小和颜色
         preloadBar: {
