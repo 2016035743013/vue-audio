@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import jQuery from 'jquery'
+import cjzhangAudio from 'cjzhang-audio'
+Vue.use(cjzhangAudio);
 Vue.config.productionTip = false
 Vue.prototype.$ = jQuery
 /* eslint-disable no-new */

@@ -1,33 +1,14 @@
 .vue-audio {
     width: 100%;
-    height: 80px;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
 }
 .content {
-    width: 80%;
+    
     height: 100%;
     display: flex;
-}
-.left-btn{
-    width: 20%; 
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.left-btn>img {
-    width:  40px;
-    height: 40px;
-    cursor: pointer;
 }
 .center-content {
-    width: 60%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -40,14 +21,14 @@
     
 }
 
-.line-container {
+.lineContainer {
     width: 100%;
     height: 5px;
     background: white;
     position: relative;
     cursor: pointer;
 }
-.time-point {
+.point {
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -58,7 +39,7 @@
     cursor: pointer;
     background: lightblue;
 }
-.current-time-bar {
+.currentTimeBar {
     width: 0px;
     height: 100%;
     background: skyblue;
@@ -66,7 +47,7 @@
     top: 0px;
     left: 0px;
 }
-.preload-bar {
+.preloadBar {
     width: 0px;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -95,16 +76,11 @@
     align-items: center;
     color: white;
 }
-.time-info {
-    width: 20%;
-    height: 100%;
+.time {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     color: white;
-}
-.right-btn {
-    width: 20%;
-    height: 100%;
-    /* background: white; */
+    margin-bottom: 5px;
 }

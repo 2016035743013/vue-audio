@@ -1,42 +1,25 @@
 <template>
 	<div class="vue-audio">
-		<audio id="audio"  preload="auto" autoplay>
-		</audio> 
 		<div class="content">
-			<div class="left-btn">
-				<img @click="preSong" src="../assets/images/pre.png" alt="">
-				<img @click='audioPause' v-if="toggleBtn" src="../assets/images/stop.png" alt="">
-				<img @click="audioPlay" v-else src="../assets/images/play.png" alt="">
-				<img @click="nextSong" src="../assets/images/next.png" alt="">
-				<div class="singer-head">
-					<img src="../assets/logo.png" alt="">
-				</div>
-			</div>
 			<div class="center-content">
-				<div class="song-info">
-					<div class="song">
-						test - test
-					</div>
-					<div class="time-info">
-						{{curTime}} / {{duration}}
-					</div>
+				<div class="time">
+					{{curTime}} / {{duration}}
 				</div>
+				<!-- </div> -->
 				<div class="progress-bar">
 					<!-- 进度条容器 -->
-					<div class="line-container">
+					<div class="lineContainer">
 						<!-- 进度条滑块 -->
-						<div class="time-point">
+						<div class="point">
 						</div>
 						<!-- 当前播放的进度条 -->
-						<div class="current-time-bar">
+						<div class="currentTimeBar">
 						</div>
 						<!-- 预加载的进度条 -->
-						<div class="preload-bar">
+						<div class="preloadBar">
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="right-btn">
 			</div>
 		</div>
 	</div>
@@ -46,24 +29,45 @@
 		name: 'vue-audio',
 		data() {
 			return {
-				audioDom: null,//音频对象
-				audioSrc: ["https://music.snowmusic.com.cn/formalServer/song/e13cfb37e8216fb9165dc95d0bd74186/HQ/1ABCF2B24405F4530E34B062030DBC8F.mp3","https://music.snowmusic.com.cn/SQ/36aa3393af4b4d4884ccabb09b03cf62/sq/FLY%20ANU.mp3", "https://music.snowmusic.com.cn//uploadfile/2015/0507/20150507030641510.mp3"],//音频资源	
-				audioIndex: 0,
-				toggleBtn: false,//暂停和播放按钮的切换
+				audioDom: null,
 				duration: '00:00',
 				curTime: '00:00',
 				durationTime: 0,//音乐播放持续的时间
 			}
 		},
+		props: [
+			'opt',//audio对象
+			'src',//音频链接
+			'audioCss',//播放器样式
+		],
+		watch: {
+			src(newVal, oldVal) {
+				// console.log(newVal, oldVal);
+				this.audioDom.src = newVal;
+			}
+		},
 		mounted() {
+			console.log(this.audioCss);
 			const that = this;
+			// this.$(function() {
+			// that.audioDom = $('#audio')[0];
 			this.$(function() {
-				that.audioDom = $('#audio')[0];
+
+				// 播放器样式初始化
+				for(let item in that.audioCss) {
+					console.log(item , typeof that.audioCss[item]);
+					$('.' + item ).css(
+						that.audioCss[item]
+					)
+				}
+
+				that.audioDom = that.opt;
 				// that.audioDom.src = that.audioSrc[0];
 				// 播放结束播放下一首歌
 				that.audioDom.addEventListener('ended', function() {
 					// console.log('播放完了');
-					that.nextSong();
+					// that.nextSong();
+					that.$emit('songEnded');
 				});
 				// 获取歌曲的持续时间
 				that.getDuration();
@@ -71,11 +75,10 @@
 				that.audioDom.addEventListener('timeupdate', function() {
 					let curTime = that.audioDom.currentTime;
 					that.curTime = that.formatTime(curTime);
-					let pointX = curTime * 1000 / (that.durationTime * 1000) * $('.line-container').width();
+					let pointX = curTime * 1000 / (that.durationTime * 1000) * $('.lineContainer').width();
 					if(Number.isNaN(pointX)) {
 						return;
 					}
-					// console.log(pointX);
 					// 动态设置进度条的播放
 					that.setProgress(pointX);
 					// 动态设置缓存的的进度条
@@ -84,9 +87,6 @@
 				
 				// 动态改变进度条的播放进度
 				that.playBar();
-				that.audioDom.addEventListener('emptied', function() {
-					console.log('empty');
-				})
 			});
 		},
 		methods: {
@@ -136,33 +136,33 @@
 			playBar() {
 				let pointX = 0;//存放鼠标距离进度条最左边的点的位置的横坐标
 				let pageX = 0;//存放鼠标相距离整个浏览器最左边的横坐标
-				let lineX = $('.line-container').offset().left;//进度条容器距离浏览器左边的横坐标
+				let lineX = $('.lineContainer').offset().left;//进度条容器距离浏览器左边的横坐标
 				const that = this;
 				// 点击进度条容器改变歌曲播放进度
-				this.$('.line-container').click(function(event) {
+				this.$('.lineContainer').click(function(event) {
 					pageX = event.pageX || event.clientX;//获取鼠标点击的横坐标（现对于整个浏览器）
 					pointX = pageX - lineX;
 					// 比对缓存的进度条宽度，如果超过，那就无法改变当前的播放进度
-					if(pointX > that.$('.preload-bar').width()) {
+					if(pointX > that.$('.preloadBar').width()) {
 						return;
 					}
 					that.setProgress(pointX);//设置进度条宽度和滑块的横坐标
-					let percent = pointX /  $('.line-container').width();
+					let percent = pointX /  $('.lineContainer').width();
 					that.audioDom.currentTime = percent * that.durationTime;//改变音频的播放进度
 				})
 
 				// 滑动进度条滑块改变歌曲播放进度
-				this.$('.time-point').mousedown(function() {
+				this.$('.point').mousedown(function() {
 					$(document).mousemove(function(event) {
 						// console.log('mousemove');
 					 	pageX = event.clientX || event.pageX;
 						pointX = pageX - lineX;
 						// 比对缓存的进度条宽度，如果超过，那就无法改变当前的播放进度
-						if(pointX > that.$('.preload-bar').width()) {
+						if(pointX > that.$('.preloadBar').width()) {
 							return;
 						}
 						that.setProgress(pointX);
-						let percent = pointX /  $('.line-container').width();
+						let percent = pointX /  $('.lineContainer').width();
 						that.audioDom.currentTime = percent * that.durationTime;
 					})
 				});
@@ -175,13 +175,13 @@
 			setProgress(pointX) {
 				if(pointX <= 0) {
 					pointX = 0;
-				} else if(pointX >= $('.line-container').width() ) {
-					pointX = $('.line-container').width() - $('.time-point').width();
+				} else if(pointX >= $('.lineContainer').width() ) {
+					pointX = $('.lineContainer').width() - $('.point').width();
 				}
-				$('.current-time-bar').css({
+				$('.currentTimeBar').css({
 					width: pointX
 				});
-				$('.time-point').css({
+				$('.point').css({
 					left: pointX
 				})
 			},
@@ -190,8 +190,8 @@
 				if(this.audioDom.buffered.length != 0) {
 					let buffered = this.audioDom.buffered;
 					let cacheX  = buffered.end(buffered.length - 1) / this.durationTime;
-					let lineContainerWidth = $('.line-container').width();
-					$('.preload-bar').css({
+					let lineContainerWidth = $('.lineContainer').width();
+					$('.preloadBar').css({
 						width: lineContainerWidth * cacheX
 					})
 				}

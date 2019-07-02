@@ -11,6 +11,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "cjhcj-audio": "^1.0.2",
+    "cjzhang-audio": "^1.0.0",
     "jquery": "^3.4.1",
     "vue": "^2.5.2"
   },
