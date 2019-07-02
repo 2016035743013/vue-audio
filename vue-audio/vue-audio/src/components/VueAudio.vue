@@ -42,12 +42,11 @@
 		],
 		watch: {
 			src(newVal, oldVal) {
-				// console.log(newVal, oldVal);
 				this.audioDom.src = newVal;
 			}
 		},
 		mounted() {
-			console.log(this.audioCss);
+
 			const that = this;
 			// this.$(function() {
 			// that.audioDom = $('#audio')[0];
@@ -55,7 +54,6 @@
 
 				// 播放器样式初始化
 				for(let item in that.audioCss) {
-					console.log(item , typeof that.audioCss[item]);
 					$('.' + item ).css(
 						that.audioCss[item]
 					)
@@ -65,7 +63,6 @@
 				// that.audioDom.src = that.audioSrc[0];
 				// 播放结束播放下一首歌
 				that.audioDom.addEventListener('ended', function() {
-					// console.log('播放完了');
 					// that.nextSong();
 					that.$emit('songEnded');
 				});
@@ -90,40 +87,6 @@
 			});
 		},
 		methods: {
-			// 音频的播放
-			audioPlay() {
-				if(this.audioDom.src != '') {
-					this.audioDom.play();
-					this.toggleBtn = true;
-				}
-			},
-			// 音频暂停
-			audioPause() {
-				if(this.audioDom.src != '') {
-					this.audioDom.pause();
-					this.toggleBtn = false;
-				}
-			},
-			// 下一首歌
-			nextSong() {
-				if(this.audioIndex >= this.audioSrc.length - 1) {
-					this.audioIndex = 0;
-				} else {
-					this.audioIndex++;
-				}
-				this.audioDom.src = this.audioSrc[this.audioIndex];//改变音频的播放链接
-				this.audioPlay();
-			},
-			// 上一首歌
-			preSong() {
-				if(this.audioIndex <=0 ) {
-					this.audioIndex = this.audioSrc.length - 1;
-				} else {
-					this.audioIndex--;
-				}
-				this.audioDom.src = this.audioSrc[this.audioIndex];//改变音频的播放链接
-				this.audioPlay();
-			},
 			// 获取歌曲对的持续时间
 			getDuration() {
 				const that = this;
@@ -154,7 +117,6 @@
 				// 滑动进度条滑块改变歌曲播放进度
 				this.$('.point').mousedown(function() {
 					$(document).mousemove(function(event) {
-						// console.log('mousemove');
 					 	pageX = event.clientX || event.pageX;
 						pointX = pageX - lineX;
 						// 比对缓存的进度条宽度，如果超过，那就无法改变当前的播放进度

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <audio id="audio"  preload="auto" autoplay></audio>
+   <audio id="audio"  preload="auto" autoplay>抱歉，你的浏览器不支持audio音频</audio>
    
     <div class="player" >
 
@@ -16,9 +16,7 @@
         <VueAudio :audio='audio' :src='audioSrc' @songEnded='songEnd' :audioCss = 'audioCss'/>
       </div>
       <!-- 音频播放组件结束 -->
-
     </div>
-    
   </div>
 </template>
 
@@ -46,7 +44,7 @@ export default {
           width: '12px',
           height: '12px',
           backgroundColor: 'white'
-        },//进度条点的大小和颜色
+        },//进度条滑动点的大小和颜色
         preloadBar: {
           backgroundColor: 'gray'
         },//预加载的进度条的颜色
@@ -60,23 +58,26 @@ export default {
     this.audio = this.$('#audio')[0];
   },
   methods: {
-  
+    // 一首歌播放结束之后
     songEnd() {
-      // console.log('test');
-      this.nextSong();
+      // this.nextSong();
+      console.log('播放结束');//这里播放结束你可以改变音频的链接播放下一首歌什么的，你自定义自己的逻辑
     },
+    // 播放歌曲
     playSong() {
       this.toggleBtn = true;
       this.audio.play();
     },
+    // 暂停歌曲
     pauseSong() {
       this.toggleBtn = false;
       this.audio.pause();
     },
+    // 播放下一首歌
     nextSong() {
-     
       this.audioSrc = this.audioLinks[1];
     },
+    // 播放前一首歌
     preSong() {
       this.audioSrc = this.audioLinks[2];
     }
